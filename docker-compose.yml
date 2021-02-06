@@ -19,6 +19,7 @@ services:
       ports:
         - "8080:80"
       environment:
+        # TODO: recuperar el project_name automaticament
         - PROJECT_NAME=apache-nginx
       volumes:
         # Utilitzant templates es poden fer servir variables d'entorn
