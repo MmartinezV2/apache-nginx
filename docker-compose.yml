@@ -1,0 +1,25 @@
+version: '3'
+services:
+    app:
+      build: .
+      image: app:1.0.0
+      volumes:
+        - ./build:/var/www/html
+      restart: always
+      deploy:
+        replicas: 4
+        mode: replicated
+        restart_policy:
+          condition: on-failure
+#      env_file: .env
+      environment:
+        - TZ=Europe/Madrid
+    proxy:
+      image: nginx
+      ports:
+        - "8080:80"
+      environment:
+        - PROJECT_NAME=apache-nginx
+      volumes:
+        # Utilitzant templates es poden fer servir variables d'entorn
+        - ./nginx/templates:/etc/nginx/templates

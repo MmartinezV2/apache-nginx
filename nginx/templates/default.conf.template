@@ -1,0 +1,21 @@
+
+    upstream myapp1 {
+#        server apache-nginx_app_1;
+#        server apache-nginx_app_2;
+#        server apache-nginx_app_3;
+#        server apache-nginx_app_4;
+        server ${PROJECT_NAME}_app_1;
+        server ${PROJECT_NAME}_app_2;
+        server ${PROJECT_NAME}_app_3;
+        server ${PROJECT_NAME}_app_4;
+    }
+
+    server {
+      listen        80;
+      server_name   localhost;
+
+
+      location / {
+        proxy_pass  http://myapp1;
+      }
+    }
